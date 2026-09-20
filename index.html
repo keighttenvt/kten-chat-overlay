@@ -48,218 +48,164 @@ This overlay works by:
     <meta name="generator" content="Social Stream Ninja - https://github.com/steveseguin/social_stream">
 <style>
 /* =========================================================
-   FULL PASTEL CHAT CSS
+   KTEN PASTEL CHAT OVERLAY
+   FULL CSS — USERNAME FIXED
    Social Stream Ninja
    ========================================================= */
-
-
-/* =========================
-   GLOBAL
-   ========================= */
 
 html,
 body {
     margin: 0 !important;
     padding: 0 !important;
-
     width: 100% !important;
     height: 100% !important;
-
     background: transparent !important;
-
     overflow: hidden !important;
-
-    font-family:
-        "Comic Sans MS",
-        "Trebuchet MS",
-        Arial,
-        sans-serif !important;
+    font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif !important;
 }
-
-
-/* =========================
-   CHAT AREA
-   ========================= */
 
 #chat-container {
+    position: absolute !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
     width: 100% !important;
     max-width: none !important;
-
-    padding: 18px 26px !important;
-
+    height: 100vh !important;
+    padding: 16px 18px !important;
+    overflow: hidden !important;
     box-sizing: border-box !important;
+    background: transparent !important;
 }
-
 
 #message-list-wrapper,
 #message-list {
     width: 100% !important;
     max-width: none !important;
-
     margin: 0 !important;
     padding: 0 !important;
-
     background: transparent !important;
-
     box-sizing: border-box !important;
 }
 
-
-/* =========================
-   MESSAGE WRAPPER
-   ========================= */
+#spacer {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+}
 
 .message {
     position: relative !important;
-
     display: block !important;
-
     width: 100% !important;
     max-width: none !important;
-
     min-height: 0 !important;
     height: auto !important;
-
-    margin: 0 0 36px 0 !important;
+    margin: 0 0 28px 0 !important;
     padding: 0 !important;
-
     background: transparent !important;
-
     border: none !important;
     border-left: none !important;
-
     border-radius: 0 !important;
-
     box-shadow: none !important;
-
     overflow: visible !important;
-
-
     box-sizing: border-box !important;
+    --scroll-opacity: 1;
+    filter: opacity(var(--scroll-opacity)) !important;
+    transition: opacity .35s ease, transform .35s ease !important;
+    opacity: 0;
+    transform: translateY(12px);
 }
-
 
 .message[style] {
     border-left: none !important;
     padding-left: 0 !important;
 }
 
+.message.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
 
-/* =========================
-   MAIN BUBBLE
-   ========================= */
+.message.fading { opacity: 0 !important; }
+.message.proximity-fading { --scroll-opacity: 0; }
 
 .message-content-wrapper {
     position: relative !important;
-
     display: flex !important;
     align-items: flex-start !important;
-
     width: 100% !important;
     max-width: none !important;
-
-    min-height: 0 !important;
+    min-height: 48px !important;
     height: auto !important;
-
-    margin: 30px 0 0 0 !important;
-
-    padding: 10px 26px 11px 26px !important;
-
+    margin: 22px 0 0 0 !important;
+    padding: 10px 18px 11px 18px !important;
+    gap: 7px !important;
     box-sizing: border-box !important;
-
     background:
-        radial-gradient(
-            circle at 28px calc(100% - 10px),
-            rgba(255,255,255,.18) 0 11px,
-            transparent 12px
-        ),
-        radial-gradient(
-            circle at calc(100% - 20px) 17px,
-            rgba(255,255,255,.15) 0 8px,
-            transparent 9px
-        ),
+        radial-gradient(circle at 28px calc(100% - 10px), rgba(255,255,255,.18) 0 10px, transparent 11px),
+        radial-gradient(circle at calc(100% - 20px) 17px, rgba(255,255,255,.14) 0 8px, transparent 9px),
         #c4e0f6 !important;
-
-    border: 2px solid #ff9dbd !important;
-
-    border-radius: 23px !important;
-
+    border: 1.5px solid #ff9dbd !important;
+    border-radius: 20px !important;
     box-shadow: none !important;
-
     overflow: visible !important;
 }
-
-
-/* =========================
-   USERNAME
-   ========================= */
 
 .name-bg {
     position: absolute !important;
-
-    left: 31px !important;
-    top: -30px !important;
-
+    left: 30px !important;
+    top: -24px !important;
     display: block !important;
-
     width: auto !important;
-    max-width: none !important;
-
+    height: auto !important;
+    max-width: calc(100% - 60px) !important;
     margin: 0 !important;
     padding: 0 !important;
-
     background: transparent !important;
-
     border: none !important;
     border-radius: 0 !important;
-
+    outline: none !important;
     box-shadow: none !important;
-
-    z-index: 30 !important;
+    z-index: 50 !important;
 }
-
 
 .name {
     display: block !important;
-
-    max-width: none !important;
-
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-
-    color: #9ccfff !important;
-
-    font-size: 22px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: #8fc8f5 !important;
+    font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif !important;
+    font-size: 17px !important;
     line-height: 1 !important;
-
     font-weight: 800 !important;
-
+    font-style: normal !important;
     white-space: nowrap !important;
-
-    overflow: visible !important;
-
-    text-shadow: none !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-shadow: 0 1px 0 rgba(255,255,255,.65) !important;
 }
-
-
-/* small heart before username */
 
 .name::before {
     content: "♥" !important;
-
     display: inline-block !important;
-
-    margin-right: 7px !important;
-
-    color: #9ccfff !important;
-
-    font-size: 8px !important;
-
+    margin-right: 5px !important;
+    color: #a6d4f8 !important;
+    font-size: 7px !important;
     vertical-align: middle !important;
-
     transform: rotate(-18deg) !important;
 }
-
 
 .name::after,
 .name-bg::before,
@@ -268,31 +214,37 @@ body {
     display: none !important;
 }
 
-
-/* =========================
-   INNER CONTENT
-   ========================= */
+.message .name,
+.message .name-bg {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
 
 .message-text-meta {
     position: relative !important;
-
     flex: 1 1 auto !important;
-
     min-width: 0 !important;
-
     width: 100% !important;
     max-width: none !important;
-
     margin: 0 !important;
     padding: 0 !important;
-
     background: transparent !important;
-
     border: none !important;
-
     box-shadow: none !important;
 }
 
+.message-text-meta > div:first-child {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    min-height: 16px !important;
+    margin: 0 0 2px 0 !important;
+    padding: 0 !important;
+    gap: 3px !important;
+}
 
 .message-content,
 .message-text,
@@ -300,385 +252,221 @@ body {
 .meta {
     min-height: 0 !important;
     height: auto !important;
-
     background: transparent !important;
-
     border: none !important;
     border-radius: 0 !important;
-
     box-shadow: none !important;
 }
-
-
-/* =========================
-   CHAT TEXT
-   ========================= */
 
 .text {
     display: block !important;
-
     width: 100% !important;
     max-width: none !important;
-
     min-height: 0 !important;
     height: auto !important;
-
-    margin: 3px 0 0 0 !important;
+    margin: 2px 0 0 0 !important;
     padding: 0 !important;
-
-    color: #2c435c !important;
-
-    font-size: 18px !important;
-    line-height: 1.34 !important;
-
+    color: #29435e !important;
+    font-size: 16px !important;
+    line-height: 1.3 !important;
     font-weight: 700 !important;
-
+    font-style: normal !important;
     letter-spacing: 0 !important;
-
     white-space: normal !important;
-
     word-break: normal !important;
     overflow-wrap: break-word !important;
-
     text-shadow: none !important;
 }
 
-
-/* =========================
-   AVATAR
-   ========================= */
-
 .avatar-wrapper {
-    width: 23px !important;
-    height: 23px !important;
-
-    min-width: 23px !important;
-    max-width: 23px !important;
-
-    flex: 0 0 23px !important;
-
-    margin: 0 9px 0 0 !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    flex: 0 0 22px !important;
+    margin: 0 6px 0 0 !important;
     padding: 2px !important;
-
     border-radius: 50% !important;
-
     background: #ffb4cf !important;
-
     box-sizing: border-box !important;
-
     box-shadow: none !important;
-
     overflow: hidden !important;
 }
-
 
 .avatar {
     width: 100% !important;
     height: 100% !important;
-
     border-radius: 50% !important;
-
     background-size: cover !important;
     background-position: center !important;
-
-    object-fit: cover !important;
-
-    border: 1px solid white !important;
-
+    background-repeat: no-repeat !important;
+    border: 1px solid #ffffff !important;
     box-sizing: border-box !important;
-
     box-shadow: none !important;
 }
 
-
-/* =========================
-   PLATFORM / BADGES
-   ========================= */
-
 .source-icon {
-    width: 16px !important;
-    height: 16px !important;
-
-    max-width: 16px !important;
-    max-height: 16px !important;
-
-    margin: 0 4px !important;
-
+    width: 13px !important;
+    height: 13px !important;
+    min-width: 13px !important;
+    min-height: 13px !important;
+    max-width: 13px !important;
+    max-height: 13px !important;
+    margin: 0 2px !important;
+    object-fit: contain !important;
     vertical-align: middle !important;
 }
-
 
 .badge {
     width: auto !important;
-
-    height: 16px !important;
-    max-height: 16px !important;
-
-    margin-left: 4px !important;
-
+    height: 14px !important;
+    max-height: 14px !important;
+    margin-left: 2px !important;
     vertical-align: middle !important;
 }
 
-
-/* =========================
-   MEMBERSHIP / DONATION
-   ========================= */
+.badge.svg { overflow: hidden !important; }
+.badge.svg svg {
+    width: auto !important;
+    height: 14px !important;
+    max-width: 80px !important;
+    max-height: 14px !important;
+}
 
 .membership-status {
     display: block !important;
-
-    margin: 0 0 3px 0 !important;
+    margin: 2px 0 3px 0 !important;
     padding: 0 !important;
-
-    color: #2bcf45 !important;
-
-    font-size: 14px !important;
-    line-height: 1.1 !important;
-
+    color: #33c94b !important;
+    font-size: 13px !important;
+    line-height: 1.15 !important;
     font-weight: 800 !important;
-
+    font-style: normal !important;
     background: transparent !important;
-
     border: none !important;
-
     box-shadow: none !important;
 }
-
 
 .donation {
     display: block !important;
-
     margin: 4px 0 0 0 !important;
     padding: 0 !important;
-
     color: #28c943 !important;
-
-    font-size: 16px !important;
-    line-height: 1.1 !important;
-
+    font-size: 15px !important;
+    line-height: 1.15 !important;
     font-weight: 800 !important;
-
     background: transparent !important;
-
     border: none !important;
-
     box-shadow: none !important;
 }
 
-
-/* =========================
-   DAISY ASSETS
-   NO CIRCLE AROUND FLOWERS
-   ========================= */
-
 :root {
-    --kten-daisy-big:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23ffdbe8' stroke='%23ff9dbd' stroke-width='4.5' stroke-linejoin='round'%3E%3Cellipse cx='50' cy='22' rx='14' ry='19'/%3E%3Cellipse cx='75' cy='40' rx='14' ry='19' transform='rotate(72 75 40)'/%3E%3Cellipse cx='66' cy='71' rx='14' ry='19' transform='rotate(144 66 71)'/%3E%3Cellipse cx='34' cy='71' rx='14' ry='19' transform='rotate(216 34 71)'/%3E%3Cellipse cx='25' cy='40' rx='14' ry='19' transform='rotate(288 25 40)'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='11' fill='white' stroke='%23ff9dbd' stroke-width='3.5'/%3E%3Ccircle cx='50' cy='50' r='3.5' fill='%23b7daf7'/%3E%3C/svg%3E");
-
-    --kten-daisy-small:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23ffe3ec' stroke='%23ff9dbd' stroke-width='5.5' stroke-linejoin='round'%3E%3Cellipse cx='50' cy='22' rx='14' ry='19'/%3E%3Cellipse cx='75' cy='40' rx='14' ry='19' transform='rotate(72 75 40)'/%3E%3Cellipse cx='66' cy='71' rx='14' ry='19' transform='rotate(144 66 71)'/%3E%3Cellipse cx='34' cy='71' rx='14' ry='19' transform='rotate(216 34 71)'/%3E%3Cellipse cx='25' cy='40' rx='14' ry='19' transform='rotate(288 25 40)'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='10' fill='white' stroke='%23ff9dbd' stroke-width='3.5'/%3E%3C/svg%3E");
+    --kten-daisy-big: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23ffdbe8' stroke='%23ff9dbd' stroke-width='4.5' stroke-linejoin='round'%3E%3Cellipse cx='50' cy='22' rx='14' ry='19'/%3E%3Cellipse cx='75' cy='40' rx='14' ry='19' transform='rotate(72 75 40)'/%3E%3Cellipse cx='66' cy='71' rx='14' ry='19' transform='rotate(144 66 71)'/%3E%3Cellipse cx='34' cy='71' rx='14' ry='19' transform='rotate(216 34 71)'/%3E%3Cellipse cx='25' cy='40' rx='14' ry='19' transform='rotate(288 25 40)'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='11' fill='white' stroke='%23ff9dbd' stroke-width='3.5'/%3E%3Ccircle cx='50' cy='50' r='3.5' fill='%23b7daf7'/%3E%3C/svg%3E");
+    --kten-daisy-small: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23ffe3ec' stroke='%23ff9dbd' stroke-width='5.5' stroke-linejoin='round'%3E%3Cellipse cx='50' cy='22' rx='14' ry='19'/%3E%3Cellipse cx='75' cy='40' rx='14' ry='19' transform='rotate(72 75 40)'/%3E%3Cellipse cx='66' cy='71' rx='14' ry='19' transform='rotate(144 66 71)'/%3E%3Cellipse cx='34' cy='71' rx='14' ry='19' transform='rotate(216 34 71)'/%3E%3Cellipse cx='25' cy='40' rx='14' ry='19' transform='rotate(288 25 40)'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='10' fill='white' stroke='%23ff9dbd' stroke-width='3.5'/%3E%3C/svg%3E");
 }
-
-
-/* =========================
-   TOP-LEFT DAISY
-   ========================= */
 
 .message-content-wrapper::before {
     content: "" !important;
-
     position: absolute !important;
-
-    left: -14px !important;
-    top: -12px !important;
-
-    width: 32px !important;
-    height: 32px !important;
-
-    background:
-        var(--kten-daisy-big)
-        center / contain
-        no-repeat !important;
-
+    left: -11px !important;
+    top: -10px !important;
+    width: 27px !important;
+    height: 27px !important;
+    background: var(--kten-daisy-big) center / contain no-repeat !important;
     background-color: transparent !important;
-
     border: none !important;
     border-radius: 0 !important;
-
     box-shadow: none !important;
     outline: none !important;
-
     padding: 0 !important;
-
     z-index: 40 !important;
 }
-
-
-/* =========================
-   BOTTOM-RIGHT DAISY
-   ========================= */
 
 .message-content-wrapper::after {
     content: "" !important;
-
     position: absolute !important;
-
-    right: -14px !important;
-    bottom: -12px !important;
-
-    width: 32px !important;
-    height: 32px !important;
-
-    background:
-        var(--kten-daisy-big)
-        center / contain
-        no-repeat !important;
-
+    right: -11px !important;
+    bottom: -10px !important;
+    width: 27px !important;
+    height: 27px !important;
+    background: var(--kten-daisy-big) center / contain no-repeat !important;
     background-color: transparent !important;
-
     border: none !important;
     border-radius: 0 !important;
-
     box-shadow: none !important;
     outline: none !important;
-
     padding: 0 !important;
-
     z-index: 40 !important;
 }
 
-
-/* =========================
-   SMALL LEFT FLOWER
-   ========================= */
-
 .message::before {
     content: "" !important;
-
     position: absolute !important;
-
-    left: -4px !important;
-    top: 50px !important;
-
-    width: 13px !important;
-    height: 13px !important;
-
-    background:
-        var(--kten-daisy-small)
-        center / contain
-        no-repeat !important;
-
+    left: -2px !important;
+    top: 45px !important;
+    width: 11px !important;
+    height: 11px !important;
+    background: var(--kten-daisy-small) center / contain no-repeat !important;
     background-color: transparent !important;
-
     border: none !important;
     border-radius: 0 !important;
-
     box-shadow: none !important;
     outline: none !important;
-
     padding: 0 !important;
-
     z-index: 39 !important;
 }
 
-
-/* =========================
-   BOOKMARK
-   ========================= */
-
 .message::after {
     content: "♥" !important;
-
     position: absolute !important;
-
-    left: 37px !important;
-    bottom: -19px !important;
-
-    width: 18px !important;
-    height: 26px !important;
-
+    left: 34px !important;
+    bottom: -15px !important;
+    width: 16px !important;
+    height: 23px !important;
     display: flex !important;
     justify-content: center !important;
     align-items: flex-start !important;
-
     padding-top: 4px !important;
-
     box-sizing: border-box !important;
-
     background: #aad7fa !important;
-
-    border: 2px solid #ff9dbd !important;
-
+    border: 1.5px solid #ff9dbd !important;
     color: #ffabc7 !important;
-
-    font-size: 7px !important;
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            100% 72%,
-            50% 100%,
-            0 72%
-        ) !important;
-
+    font-size: 6px !important;
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%) !important;
     box-shadow: none !important;
-
     z-index: 35 !important;
 }
 
-
-/* =========================
-   EMPTY MESSAGE
-   ========================= */
-
 .message-content-wrapper:has(.text:empty) {
-    min-height: 22px !important;
-
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    min-height: 40px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
 }
-
-
-/* =========================
-   EMOTES / IMAGES
-   ========================= */
 
 .text img,
 .text svg {
-    max-height: 26px !important;
-
+    max-height: 25px !important;
     width: auto !important;
-
     vertical-align: middle !important;
 }
-
 
 .large-image {
     max-width: 100% !important;
     height: auto !important;
-
     border-radius: 10px !important;
 }
 
-
-/* =========================
-   FINAL RESET
-   ========================= */
+.message .text[style] { font-style: normal !important; }
 
 .message,
 .message-content-wrapper,
 .message-text-meta,
-.text {
-    max-width: none !important;
-}
-
+.text { max-width: none !important; }
 
 .message *,
-.message {
-    text-shadow: none !important;
-}
-
+.message { text-shadow: none !important; }
 
 .message-content-wrapper::before,
 .message-content-wrapper::after,
